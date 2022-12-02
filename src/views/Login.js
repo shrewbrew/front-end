@@ -13,23 +13,22 @@ const Login = () => {
     };
     e.preventDefault();
     console.log(details);
-    // setMessage("Details submitted successfully");
-    // fetch("", {
-    //   method: "POST",
-    //   headers: { "Content-type": "application/json" },
-    //   body: details,
-    // })
-    //   .then((r) => r.json())
-    //   .then((res) => {
-    //     if (res) {
-    //     }
-    //   });
-
-    fetch("https://localhost:7226/api/values")
-      .then((res) => res.json())
-      .then((result) => {
-        setMessage(result);
+    fetch("https://localhost:7226/api/values?email=xyz@gmail.com", {
+      method: "GET",
+    })
+      .then((r) => r.json())
+      .then((res) => {
+        if (res) {
+          setMessage("Details submitted successfully");
+        }
       });
+
+    // fetch("https://reqres.in/api/products/5")
+    //   .then((res) => res.json())
+    //   .then((result) => {
+    //     setMessage(result.data.name);
+    //     console.log(result);
+    //   });
   };
   return (
     <form onSubmit={handleSubmit}>
