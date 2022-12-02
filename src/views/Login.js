@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Button from "../components/elements/Button";
 
 const Login = () => {
+  let [message, setMessage] = useState("");
   const inputEmail = useRef(null);
   const inputPassword = useRef(null);
 
@@ -19,7 +20,7 @@ const Login = () => {
       .then((r) => r.json())
       .then((res) => {
         if (res) {
-          this.setState({ message: "New details Created Successfully" });
+          setMessage("Details submitted successfully");
         }
       });
   };
@@ -36,6 +37,7 @@ const Login = () => {
       <Button color="primary" type="submit">
         Submit
       </Button>
+      {message}
     </form>
   );
 };
