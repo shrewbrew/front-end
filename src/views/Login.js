@@ -2,15 +2,17 @@ import React, { useRef, useState } from "react";
 import Button from "../components/elements/Button";
 
 const Login = () => {
-  let [message, setMessage] = useState("");
+  let [message, setMessage] = useState("You");
   const inputEmail = useRef(null);
   const inputPassword = useRef(null);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     let details = {
       email: inputEmail.current.value,
       password: inputPassword.current.value,
     };
+    e.preventDefault();
+    console.log(details);
 
     fetch("", {
       method: "POST",
@@ -27,11 +29,11 @@ const Login = () => {
   return (
     <form onSubmit={handleSubmit}>
       <label>Email</label>
-      <input type="email" placeholde="Enter Email" ref={inputEmail}></input>
+      <input type="email" placeholder="Enter Email" ref={inputEmail}></input>
       <label>Password</label>
       <input
         type="password"
-        placeholde="Enter Password"
+        placeholder="Enter Password"
         ref={inputPassword}
       ></input>
       <Button color="primary" type="submit">
