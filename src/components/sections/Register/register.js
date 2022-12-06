@@ -16,8 +16,9 @@ const Register = ({ onFormSwitch }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const userData = {
+            username: username,
             email: email,
-            name: pass
+            password: pass
             // Password: pass
         }
         // console.log(userData)
