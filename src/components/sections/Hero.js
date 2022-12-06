@@ -3,8 +3,6 @@ import classNames from "classnames";
 import { SectionProps } from "../../utils/SectionProps";
 import ButtonGroup from "../elements/ButtonGroup";
 import Button from "../elements/Button";
-import Image from "../elements/Image";
-import Modal from "../elements/Modal";
 
 const propTypes = {
   ...SectionProps.types,
@@ -24,17 +22,6 @@ const Hero = ({
   invertColor,
   ...props
 }) => {
-  const [videoModalActive, setVideomodalactive] = useState(false);
-
-  const openModal = (e) => {
-    e.preventDefault();
-    setVideomodalactive(true);
-  };
-
-  const closeModal = (e) => {
-    e.preventDefault();
-    setVideomodalactive(false);
-  };
 
   const outerClasses = classNames(
     "hero section center-content",
@@ -60,12 +47,12 @@ const Hero = ({
               First Nations Drinking Water Class Action
             </h1>
             <div className="container-xs">
-              <p className="mt-32 mb-32 " data-reveal-delay="400">
+              <p className="mt-32 mb-32 ">
                 The claims period is open. You can submit a Claim Form for
                 compensation under the First Nation Drinking Water Settlement.
                 The deadline to submit is March 7, 2023.
               </p>
-              <div className="reveal-from-bottom" data-reveal-delay="600">
+              <div className="reveal-from-bottom">
                 <ButtonGroup>
                   <Button
                     tag="a"

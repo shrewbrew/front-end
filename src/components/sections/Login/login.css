@@ -1,0 +1,41 @@
+.auth-form-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.login-form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    text-align: left;
+    padding: 0.25rem 0;
+}
+
+input {
+    margin: 0.5rem 0;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+}
+
+button {
+    border: none;
+    background-color: #5658DD;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+.link-btn {
+    background: none;
+    cursor: pointer;
+}

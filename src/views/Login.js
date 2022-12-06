@@ -1,51 +1,99 @@
-import React, { useRef, useState } from "react";
-import Button from "../components/elements/Button";
+import React, { useState } from "react"
 
-const Login = () => {
-  let [message, setMessage] = useState("You");
-  const inputEmail = useRef(null);
-  const inputPassword = useRef(null);
+export default function (props) {
+  let [authMode, setAuthMode] = useState("signin")
 
-  const handleSubmit = (e) => {
-    let details = {
-      email: inputEmail.current.value,
-      password: inputPassword.current.value,
-    };
-    e.preventDefault();
-    console.log(details);
-    fetch("https://localhost:7226/api/values?email=xyz@gmail.com", {
-      method: "GET",
-    })
-      .then((r) => r.json())
-      .then((res) => {
-        if (res) {
-          setMessage("Details submitted successfully");
-        }
-      });
+  const changeAuthMode = () => {
+    setAuthMode(authMode === "signin" ? "signup" : "signin")
+  }
 
-    // fetch("https://reqres.in/api/products/5")
-    //   .then((res) => res.json())
-    //   .then((result) => {
-    //     setMessage(result.data.name);
-    //     console.log(result);
-    //   });
-  };
+  if (authMode === "signin") {
+    return (
+      <div className="Auth-form-container">
+        <form className="Auth-form">
+          <div className="Auth-form-content">
+            <h3 className="Auth-form-title">Sign In</h3>
+            <div className="text-center">
+              Not registered yet?{" "}
+              <span className="link-primary" onClick={changeAuthMode}>
+                Sign Up
+              </span>
+            </div>
+            <div className="form-group mt-3">
+              <label>Email address</label>
+              <input
+                type="email"
+                className="form-control mt-1"
+                placeholder="Enter email"
+              />
+            </div>
+            <div className="form-group mt-3">
+              <label>Password</label>
+              <input
+                type="password"
+                className="form-control mt-1"
+                placeholder="Enter password"
+              />
+            </div>
+            <div className="d-grid gap-2 mt-3">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </div>
+            <p className="text-center mt-2">
+              Forgot <a href="#">password?</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    )
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Email</label>
-      <input type="email" placeholder="Enter Email" ref={inputEmail}></input>
-      <label>Password</label>
-      <input
-        type="password"
-        placeholder="Enter Password"
-        ref={inputPassword}
-      ></input>
-      <Button color="primary" type="submit">
-        Submit
-      </Button>
-      {message}
-    </form>
-  );
-};
-
-export default Login;
+    <div className="Auth-form-container">
+      <form className="Auth-form">
+        <div className="Auth-form-content">
+          <h3 className="Auth-form-title">Sign In</h3>
+          <div className="text-center">
+            Already registered?{" "}
+            <span className="link-primary" onClick={changeAuthMode}>
+              Sign In
+            </span>
+          </div>
+          <div className="form-group mt-3">
+            <label>Full Name</label>
+            <input
+              type="email"
+              className="form-control mt-1"
+              placeholder="e.g Jane Doe"
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Email address</label>
+            <input
+              type="email"
+              className="form-control mt-1"
+              placeholder="Email Address"
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control mt-1"
+              placeholder="Password"
+            />
+          </div>
+          <div className="d-grid gap-2 mt-3">
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </div>
+          <p className="text-center mt-2">
+            Forgot <a href="#">password?</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  )
+}
