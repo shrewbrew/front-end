@@ -14,7 +14,6 @@ const Register = ({ onFormSwitch }) => {
     const url = 'https://localhost:44330/api/Account'
 
     const handleSubmit = (e) => {
-        e.preventDefault();
         const userData = {
             username: username,
             email: email,

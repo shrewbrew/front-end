@@ -8,9 +8,21 @@ const Login = ({ onFormSwitch }) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
+    const url = 
+
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(email)
+        const userData = {
+            email: email,
+            password: pass
+            // Password: pass
+        }
+        // console.log(userData)
+
+        axios.post(url, userData).then((result) => {
+            alert(result.data)
+        }).catch((error) => {
+            alert(error)
+        })
     }
     return (
         <div className="auth-form-container">
