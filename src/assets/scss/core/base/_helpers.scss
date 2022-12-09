@@ -5,7 +5,7 @@
 	height: 1px;
 	padding: 0;
 	overflow: hidden;
-	clip: rect(0,0,0,0);
+	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border: 0;
 }
@@ -22,15 +22,15 @@
 
 // Text alignment
 .ta-l {
-  text-align: left;
+	text-align: left;
 }
 
 .ta-c {
-  text-align: center;
+	text-align: center;
 }
 
 .ta-r {
-  text-align: right;
+	text-align: right;
 }
 
 // Font weight
@@ -134,21 +134,21 @@ img.has-shadow {
 
 // Dividers
 .has-top-divider {
-    @include divider(before);
+	@include divider(before);
 }
 
 .has-bottom-divider {
-    @include divider(after);
+	@include divider(after);
 }
 
 .invert-color {
 
 	.has-top-divider {
-	    @include divider(before, inverse);
+		@include divider(before, inverse);
 	}
 
 	.has-bottom-divider {
-	    @include divider(after, inverse);
+		@include divider(after, inverse);
 	}
 }
 
@@ -184,7 +184,7 @@ img.has-shadow {
 		left: 0;
 		width: 100%;
 		height: 100%;
-    }
+	}
 }
 
 // Spacing, margin
@@ -326,6 +326,10 @@ img.has-shadow {
 
 .ml-32 {
 	margin-left: 32px;
+}
+
+.m-64 {
+	margin: 64px;
 }
 
 // Spacing, padding
@@ -502,7 +506,7 @@ img.has-shadow {
 	padding-top: 64px;
 }
 
-@include media( '<=medium' ) {
+@include media('<=medium') {
 
 	.ta-l-mobile {
 		text-align: left;
@@ -562,10 +566,10 @@ img.has-shadow {
 
 	.spacer-64-mobile {
 		padding-top: 64px;
-	}	
+	}
 }
 
-@include media( '>medium' ) {
+@include media('>medium') {
 
 	.ta-l-desktop {
 		text-align: left;

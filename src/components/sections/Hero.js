@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames";
 import { SectionProps } from "../../utils/SectionProps";
+import { Link } from 'react-router-dom';
+
 import ButtonGroup from "../elements/ButtonGroup";
-import Button from "../elements/Button";
 
 const propTypes = {
   ...SectionProps.types,
@@ -25,10 +26,6 @@ const Hero = ({
 
   const outerClasses = classNames(
     "hero section center-content",
-    // topOuterDivider && "has-top-divider",
-    // bottomOuterDivider && "has-bottom-divider",
-    // hasBgColor && "has-bg-color",
-    // invertColor && "invert-color",
     className
   );
 
@@ -43,41 +40,21 @@ const Hero = ({
       <div className="container-sm">
         <div className={innerClasses}>
           <div className="hero-content">
-            <h1 className="mt-32 mb-16">
+            <h1 className="m-64">
               First Nations Drinking Water Class Action
             </h1>
             <div className="container-xs">
-              <p className="mt-32 mb-32 ">
+              <p className="mt-16 mb-32 ">
                 The claims period is open. You can submit a Claim Form for
                 compensation under the First Nation Drinking Water Settlement.
                 The deadline to submit is March 7, 2023.
               </p>
               <div className="reveal-from-bottom">
                 <ButtonGroup>
-                  <Button
-                    tag="a"
-                    color="primary"
-                    wideMobile
-                    href="https://cruip.com/"
-                  >
-                    Create Request
-                  </Button>
-                  <Button
-                    tag="a"
-                    color="primary"
-                    wideMobile
-                    href="https://github.com/cruip/open-react-template/"
-                  >
-                    My Requests
-                  </Button>
-                  <Button
-                    tag="a"
-                    color="primary"
-                    wideMobile
-                    href="https://github.com/cruip/open-react-template/"
-                  >
-                    Public Reading Room
-                  </Button>
+
+                  <Link to="claim" className="button button-primary button-wide-mobile button-sm">Create Request</Link>
+                  <Link to="claim" className="button button-primary button-wide-mobile button-sm">My Requests</Link>
+                  <Link to="claim" className="button button-primary button-wide-mobile button-sm">Public Reading ROom</Link>
                 </ButtonGroup>
               </div>
             </div>

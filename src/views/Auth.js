@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import Login from '../components/sections/Login/login'
 import Register from "../components/sections/Register/register";
 
@@ -12,7 +13,7 @@ const Auth = () => {
     return (
         <>
             {
-                currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} />
+                currentForm === "login" ? <Login onFormSwitch={toggleForm} className="illustration-section-01" /> : <Register onFormSwitch={toggleForm} className="illustration-section-01" />
             }
         </>
     )

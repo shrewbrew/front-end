@@ -1,33 +1,12 @@
-
-.auth-form-container {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: center;
-
-}
-
 .register-form {
+    margin-top: 5rem;
     text-align: center;
     display: flex;
     flex-direction: column;
 }
 
-label {
-    text-align: left;
-}
-
-input {
-    margin: 0.5rem 0;
-    padding: 1rem;
-    border-radius: 10px;
-    border: none;
-}
-
-button {
-    margin-top: 1rem;
+.reg-btn {
+    margin-top: 2rem;
     border: none;
     background-color: #5658DD;
     padding: 20px;
@@ -37,6 +16,8 @@ button {
 }
 
 .link-btn {
+    margin-top: 1rem;
+    border: none;
     background: none;
     cursor: pointer;
 }

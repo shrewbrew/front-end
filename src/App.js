@@ -10,6 +10,7 @@ import LayoutDefault from './layouts/LayoutDefault';
 // Views 
 import Home from './views/Home';
 import Auth from './views/Auth';
+import DisplayForm from './views/DisplayForm';
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -39,6 +40,7 @@ const App = () => {
         <Switch>
           <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
           <AppRoute exact path="/login" component={Auth} layout={LayoutDefault} />
+          <AppRoute exact path="/claim" component={DisplayForm} layout={LayoutDefault} />
         </Switch>
       )} />
   );

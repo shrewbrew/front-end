@@ -1,0 +1,13 @@
+.personal-info-form{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+input{
+    padding: 1px;
+}
+
+h6{
+    text-align: left;
+}
