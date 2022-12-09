@@ -1,3 +1,4 @@
+
 .auth-form-container {
     text-align: center;
     display: flex;
@@ -26,7 +27,7 @@ input {
 }
 
 button {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     border: none;
     background-color: #5658DD;
     padding: 20px;

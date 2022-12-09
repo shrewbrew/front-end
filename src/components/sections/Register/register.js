@@ -11,7 +11,7 @@ const Register = ({ onFormSwitch }) => {
     const [repass, setRePass] = useState();
 
 
-
+    const url = 
     const handleSubmit = (e) => {
         e.preventDefault();
         const userData = {
@@ -19,7 +19,11 @@ const Register = ({ onFormSwitch }) => {
             Password: pass
         }
 
-        axios.post(url,userData).then()
+        axios.post(url,userData).then((result)=>{
+            alert(result.data);
+        }).catch((error)=>{
+            alert(error)
+        })
     }
     return (
         <div className="auth-form-container">
