@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames";
 import { SectionProps } from "../../utils/SectionProps";
 import ButtonGroup from "../elements/ButtonGroup";
@@ -25,10 +25,6 @@ const Hero = ({
 
   const outerClasses = classNames(
     "hero section center-content",
-    // topOuterDivider && "has-top-divider",
-    // bottomOuterDivider && "has-bottom-divider",
-    // hasBgColor && "has-bg-color",
-    // invertColor && "invert-color",
     className
   );
 
@@ -43,11 +39,11 @@ const Hero = ({
       <div className="container-sm">
         <div className={innerClasses}>
           <div className="hero-content">
-            <h1 className="mt-32 mb-16">
+            <h1 className="m-64">
               First Nations Drinking Water Class Action
             </h1>
             <div className="container-xs">
-              <p className="mt-32 mb-32 ">
+              <p className="mt-16 mb-32 ">
                 The claims period is open. You can submit a Claim Form for
                 compensation under the First Nation Drinking Water Settlement.
                 The deadline to submit is March 7, 2023.

@@ -9,6 +9,7 @@
 }
 
 .register-form {
+    margin-top: 10rem;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -24,9 +25,21 @@ input {
     border-radius: 10px;
     border: none;
 }
+span {
+    font-size: 12px;
+    padding: 3px;
+    color: red;
+    display: none;
+}
 
-button {
-    margin-top: 0.5rem;
+input:invalid[focused="true"]~span {
+
+    display: block;
+
+}
+
+.reg-btn {
+    margin-top: 2rem;
     border: none;
     background-color: #5658DD;
     padding: 20px;
@@ -36,6 +49,8 @@ button {
 }
 
 .link-btn {
+    margin-top: 1rem;
+    border: none;
     background: none;
     cursor: pointer;
 }
