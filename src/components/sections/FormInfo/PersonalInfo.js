@@ -6,6 +6,7 @@ function PersonalInfo() {
 
     const [streetInput, setStreetInput] = useState(false)
     const [poBoxInput, setPoBoxInput] = useState(false)
+    const [selectedCountry, setSelectedCOuntry] = useState('Canada')
 
     const [fname, setFname] = useState('');
     const [mname, setMname] = useState('');
@@ -21,13 +22,13 @@ function PersonalInfo() {
     const [unitNumber, setUnitNumber] = useState('');
     const [poBox, setPOBox] = useState('');
     const [ctc, setCTC] = useState('');
-    const [country, setCountry] = useState('Canada')
     const [province, setProvince] = useState('');
     const [postal, setPostal] = useState('');
     const [telephone, setTelephone] = useState('');
     const [mobile, setMobile] = useState('');
     const [email, setEmail] = useState('');
     const [cname, setCName] = useState('');
+    const [gID, setGID] = useState('No');
 
     const [span, setSpan] = useState('Data submission ongoing....')
 
@@ -45,7 +46,12 @@ function PersonalInfo() {
         }
 
     }
-    // const toggleCountry
+    const toggleCOuntry = (e) => {
+        setSelectedCOuntry(e.target.value)
+        
+    }
+
+    const isRadioSelected = (value) => selectedCountry===value
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -64,8 +70,14 @@ function PersonalInfo() {
             UnitNumber: unitNumber,
             poBox: poBox,
             city: ctc,
-            // country 
-
+            country: selectedCountry,
+            province:province,
+            postalCode: postal,
+            telephoneNumber : telephone,
+            mobileNumber : mobile,
+            email : email,
+            COname : cname,
+            IsGovernmentIssuedID : gID
         };
 
         axios
@@ -249,8 +261,8 @@ function PersonalInfo() {
                         type='radio'
                         name='country'
                         value="Canada"
-                        onClick={(e)=>console.log(e.target.value)}
-
+                        checked={isRadioSelected('Canada')}
+                        onChange={toggleCOuntry}
                     />Canada
                 </label>
                 <label htmlFor='country' class="radio-inline">
@@ -259,6 +271,8 @@ function PersonalInfo() {
                         type='radio'
                         name='country'
                         value="United States of America"
+                        checked={isRadioSelected('United States of America')}
+                        onChange={toggleCOuntry}
 
                     />United States of America
                 </label>
@@ -268,9 +282,12 @@ function PersonalInfo() {
                         type='radio'
                         name='country'
                         value="Other"
+                        checked={isRadioSelected("Other")}
+                        onChange={toggleCOuntry}
 
                     />Other
                 </label>
+                {selectedCountry}
                 <label htmlFor='province'>Province/Territory</label>
                 <input
                     value={province}
@@ -366,6 +383,7 @@ function PersonalInfo() {
                         type='radio'
                         name='second'
                         id='firfst'
+                        value={gID}
 
                     />No
                 </label>
