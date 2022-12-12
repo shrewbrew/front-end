@@ -1,13 +1,18 @@
-.personal-info-form{
-    display: flex;
-    flex-direction: column;
-    width: auto;
+.personal-info-form {
+  display: flex;
+  flex-direction: column;
+  width: auto;
 }
 
-input{
-    padding: 1px;
+input {
+  padding: 5px;
 }
 
-h6{
+input.radio {
     text-align: left;
+  display: inline;
+}
+
+h6 {
+  text-align: left;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import ClaimForm from '../components/ClaimForm'
 
+    
 function DisplayForm() {
     return (
         <>
