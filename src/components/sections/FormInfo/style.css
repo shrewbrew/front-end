@@ -8,8 +8,15 @@ input {
   padding: 5px;
 }
 
-input.radio {
-    text-align: left;
+label {
+  font-size: large;
+}
+
+table{
+  text-align: left;
+  border: none;
+}
+.radio-inline {
   display: inline;
 }
 
