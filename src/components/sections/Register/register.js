@@ -65,10 +65,13 @@ const Register = ({ onFormSwitch, className }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(values)
         // console.log(userData)
 
-        axios.post(url, values).then()
+        axios.post(url, values).then((result) => {
+            alert(result.data);
+        }).catch((error) => {
+            alert(error)
+        })
     };
 
     const onChange = (e) => {

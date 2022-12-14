@@ -4,9 +4,12 @@ import './style.css';
 
 function PersonalInfo() {
 
-    const [streetInput, setStreetInput] = useState(false)
+    const [streetInput, setStreetInput] = useState(true)
     const [poBoxInput, setPoBoxInput] = useState(false)
     const [selectedCountry, setSelectedCOuntry] = useState('Canada')
+    const [selectedFirstNation, setSelectedFirstNation] = useState('No')
+    const [selectedGId, setSelectedGId] = useState('No')
+    const [firstNationNameInput, setFirstNationNameInput] = useState(false)
 
     const [fname, setFname] = useState('');
     const [mname, setMname] = useState('');
@@ -27,8 +30,9 @@ function PersonalInfo() {
     const [telephone, setTelephone] = useState('');
     const [mobile, setMobile] = useState('');
     const [email, setEmail] = useState('');
+    const [firstNationName, setFirstNationName] = useState('')
     const [cname, setCName] = useState('');
-    const [gID, setGID] = useState('No');
+    const [gID, setGID] = useState(false);
 
     const [span, setSpan] = useState('Data submission ongoing....')
 
@@ -48,42 +52,54 @@ function PersonalInfo() {
     }
     const toggleCOuntry = (e) => {
         setSelectedCOuntry(e.target.value)
-        
+    }
+    const toggleFirstNation = (e) => {
+        setSelectedFirstNation(e.target.value)
     }
 
-    const isRadioSelected = (value) => selectedCountry===value
+    const toggleGId = (e) => {
+        setSelectedGId(e.target.value)
+    }
+
+    const isRadioSelected = (value) => selectedCountry === value
+    const isSelected = (value) => selectedFirstNation === value
+    const isChecked = (value) => selectedGId === value
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const formData = {
-            firstName: fname,
-            middleName: mname,
-            lastName: lname,
-            otherName: oname,
-            dateOfBirth: dob,
-            socialInsuranceNumber: sin,
-            indianStatusCardNumber: iscn,
-            bandRegistrationNumber: brn,
-            bandNameMemberOf: bandName,
-            provinceBandLocated: provinceName,
-            streetNameAndNumber: streetName,
-            UnitNumber: unitNumber,
-            poBox: poBox,
-            city: ctc,
-            country: selectedCountry,
-            province:province,
-            postalCode: postal,
-            telephoneNumber : telephone,
-            mobileNumber : mobile,
-            email : email,
-            COname : cname,
-            IsGovernmentIssuedID : gID
-        };
-
         axios
-            .post(url, formData)
+            .post(url, {
+
+                // claimID: 0,
+                firstName: fname,
+                middleName: mname,
+                lastName: lname,
+                otherName: oname,
+                dateOfBirth: dob,
+                socialInsuranceNumber: sin,
+                indianStatusCardNumber: iscn,
+                bandRegistrationNumber: brn,
+                bandNameMemberOf: bandName,
+                provinceBandLocated: provinceName,
+                streetNameAndNumber: streetName,
+                UnitNumber: unitNumber,
+                poBox: poBox,
+                city: ctc,
+                country: selectedCountry,
+                province: province,
+                postalCode: postal,
+                telephoneNumber: telephone,
+                mobileNumber: mobile,
+                email: email,
+                firstNationNameOfContactAddress: selectedFirstNation,
+                nameOfNation: firstNationName,
+                COname: cname,
+                IsGovernmentIssuedID: selectedGId,
+                // GovernmentIDFile: '',
+            })
             .then((result) => {
-                console.log(result)
+                console.log(result.data)
                 setSpan('Data submitted successfully');
             })
             .catch((error) => {
@@ -91,7 +107,7 @@ function PersonalInfo() {
             });
     };
     return (
-        <div className='container'>
+        <div className='container border'>
             <form className='personal-info-form' onSubmit={handleSubmit}>
                 <h6>
                     Please fill in all you can here, so we can process your claim. What
@@ -211,13 +227,14 @@ function PersonalInfo() {
                     blank.
                 </h6>
                 <h6>Current mailing address or the address where you can be reached</h6>
-                <label htmlFor='streetName' class="radio-inline">
+                <label htmlFor='streetName'>
                     <input
 
                         type='radio'
                         name='address'
                         id='street'
                         onClick={toggleInput}
+                        checked={streetInput}
 
                     />Street Name and Number
                 </label>
@@ -233,7 +250,7 @@ function PersonalInfo() {
                             setUnitNumber(e.target.value);
                         }}
                     /></>}
-                <label htmlFor='po' class="radio-inline">
+                <label htmlFor='po'>
                     <input
                         type='radio'
                         id='po'
@@ -255,7 +272,7 @@ function PersonalInfo() {
                         setCTC(e.target.value);
                     }}
                 />
-                <label htmlFor='country' class="radio-inline">
+                <label htmlFor='country'>
                     <input
 
                         type='radio'
@@ -265,7 +282,7 @@ function PersonalInfo() {
                         onChange={toggleCOuntry}
                     />Canada
                 </label>
-                <label htmlFor='country' class="radio-inline">
+                <label htmlFor='country'>
                     <input
 
                         type='radio'
@@ -276,7 +293,7 @@ function PersonalInfo() {
 
                     />United States of America
                 </label>
-                <label htmlFor='country' class="radio-inline">
+                <label htmlFor='country'>
                     <input
 
                         type='radio'
@@ -287,7 +304,6 @@ function PersonalInfo() {
 
                     />Other
                 </label>
-                {selectedCountry}
                 <label htmlFor='province'>Province/Territory</label>
                 <input
                     value={province}
@@ -345,24 +361,43 @@ function PersonalInfo() {
                     If this address is in a First Nation, please indicate the name of the
                     nation
                 </h6>
-                <label htmlFor='first' class="radio-inline">
+                <label htmlFor='first'>
                     <input
 
                         type='radio'
                         name='first'
-                        id='firfst'
+                        value='No'
+                        checked={isSelected('No')}
+                        onChange={toggleFirstNation}
+                        onClick={() => setFirstNationNameInput(false)}
 
                     />No
                 </label>
-                <label htmlFor='first' class="radio-inline">
+                <label htmlFor='first'>
                     <input
 
                         type='radio'
                         name='first'
-                        id='firfst'
-
+                        value='Yes'
+                        checked={isSelected('Yes')}
+                        onChange={toggleFirstNation}
+                        onClick={() => setFirstNationNameInput(true)}
                     />Yes
                 </label>
+                {firstNationNameInput &&
+                    <>
+                        <label htmlFor='firstNation'>First Nation Name of Contact Address</label>
+                        <input
+                            value={firstNationName}
+                            type='text'
+                            id='firstNationName'
+                            name='firstNationName'
+                            onChange={(e) => {
+                                setFirstNationName(e.target.value)
+                            }} />
+                    </>
+
+                }
                 <label htmlFor='cname'>C/O Name(if applicable):</label>
                 <input
                     value={cname}
@@ -377,23 +412,24 @@ function PersonalInfo() {
                     Is Government Issued ID of Claimant available for upload? If NO,
                     Sworn/Affirmed Declaration will be required
                 </h6>
-                <label htmlFor='first' class="radio-inline">
+                <label htmlFor='gid'>
                     <input
 
                         type='radio'
-                        name='second'
-                        id='firfst'
-                        value={gID}
-
+                        name='gid'
+                        value='No'
+                        checked={isChecked('No')}
+                        onChange={toggleGId}
                     />No
                 </label>
-                <label htmlFor='first' class="radio-inline">
+                <label htmlFor='gid'>
                     <input
 
                         type='radio'
-                        name='second'
-                        id='firfst'
-
+                        name='gid'
+                        value='Yes'
+                        checked={isChecked('Yes')}
+                        onChange={toggleGId}
                     />Yes
                 </label>
                 <h4>{span}</h4>
