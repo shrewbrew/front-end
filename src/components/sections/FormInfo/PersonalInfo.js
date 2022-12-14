@@ -10,6 +10,7 @@ function PersonalInfo() {
     const [selectedFirstNation, setSelectedFirstNation] = useState('No')
     const [selectedGId, setSelectedGId] = useState('No')
     const [firstNationNameInput, setFirstNationNameInput] = useState(false)
+    const [fileSelected, setFileSelected] = useState();
 
     const [fname, setFname] = useState('');
     const [mname, setMname] = useState('');
@@ -34,6 +35,9 @@ function PersonalInfo() {
     const [cname, setCName] = useState('');
     const [gID, setGID] = useState(false);
 
+    const [modal, setModal] = useState(false);
+
+
     const [span, setSpan] = useState('Data submission ongoing....')
 
     const url = 'https://localhost:44378/api/ClaimManagement/SectionOne';
@@ -54,12 +58,38 @@ function PersonalInfo() {
         setSelectedCOuntry(e.target.value)
     }
     const toggleFirstNation = (e) => {
-        setSelectedFirstNation(e.target.value)
+        setSelectedFirstNation(e.target.value);
+        setFirstNationName('')
+
     }
 
     const toggleGId = (e) => {
         setSelectedGId(e.target.value)
     }
+
+    const toggleModal = (e) => {
+        e.preventDefault()
+        setModal(!modal);
+    };
+
+    const toggleUpload = () => {
+        setGID(false)
+        setModal(false)
+    }
+
+    const saveFileSelected = (e) => {
+        //in case you wan to print the file selected
+        //console.log(e.target.files[0]);
+        setFileSelected(e.target.files[0]);
+    };
+
+
+
+    // if (modal) {
+    //     document.body.classList.add('active-modal')
+    // } else {
+    //     document.body.classList.remove('active-modal')
+    // }
 
     const isRadioSelected = (value) => selectedCountry === value
     const isSelected = (value) => selectedFirstNation === value
@@ -68,43 +98,56 @@ function PersonalInfo() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios
-            .post(url, {
+        let formData = new FormData()
 
-                // claimID: 0,
-                firstName: fname,
-                middleName: mname,
-                lastName: lname,
-                otherName: oname,
-                dateOfBirth: dob,
-                socialInsuranceNumber: sin,
-                indianStatusCardNumber: iscn,
-                bandRegistrationNumber: brn,
-                bandNameMemberOf: bandName,
-                provinceBandLocated: provinceName,
-                streetNameAndNumber: streetName,
-                UnitNumber: unitNumber,
-                poBox: poBox,
-                city: ctc,
-                country: selectedCountry,
-                province: province,
-                postalCode: postal,
-                telephoneNumber: telephone,
-                mobileNumber: mobile,
-                email: email,
-                firstNationNameOfContactAddress: selectedFirstNation,
-                nameOfNation: firstNationName,
-                COname: cname,
-                IsGovernmentIssuedID: selectedGId,
-                // GovernmentIDFile: '',
+        formData.append(firstName, fname)
+        formData.append(middleName, mname)
+        formData.append(lastName, lname)
+        formData.append(otherName, oname)
+        formData.append(dateOfBirth, dob)
+        formData.append(socialInsuranceNumber, sin)
+        formData.append(indianStatusCardNumber, iscn)
+        formData.append(bandRegistrationNumber, brn)
+        formData.append(bandNameMemberOf, bandName)
+        formData.append(provinceBandLocated, provinceName)
+        formData.append(streetNameAndNumber, streetName)
+        formData.append(UnitNumber, unitNumber)
+        formData.append(poBox, poBox)
+        formData.append(city, ctc)
+        formData.append(country, selectedCountry)
+        formData.append(province, province)
+        formData.append(postalCode, postal)
+        formData.append(telephoneNumber, telephone)
+        formData.append(mobileNumber, mobile)
+        formData.append(email, email)
+        formData.append(firstNationNameOfContactAddress, selectedFirstNation)
+        formData.append(nameOfNation, firstNationName)
+        formData.append(COname, cname)
+        formData.append(IsGovernmentIssuedID, selectedGId)
+        formData.append("file", fileSelected);
+
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+
+
+        axios.post(url, formData, config)
+            .then(response => {
+                console.log(response);
             })
-            .then((result) => {
-                console.log(result.data)
-                setSpan('Data submitted successfully');
-            })
-            .catch((error) => {
-                alert(error);
+            .catch(error => {
+                console.log(error);
             });
+    };
+
+    const importFile = async (e) => {
+        const formData = new FormData();
+        formData.append("file", fileSelected);
+        try {
+            const res = await axios.post("https://localhost:44323/api/importfile", formData);
+        } catch (ex) {
+            console.log(ex);
+        }
     };
     return (
         <div className='container border'>
@@ -420,6 +463,7 @@ function PersonalInfo() {
                         value='No'
                         checked={isChecked('No')}
                         onChange={toggleGId}
+                        onClick={toggleUpload}
                     />No
                 </label>
                 <label htmlFor='gid'>
@@ -430,9 +474,68 @@ function PersonalInfo() {
                         value='Yes'
                         checked={isChecked('Yes')}
                         onChange={toggleGId}
+                        onClick={() => setGID(true)}
+
                     />Yes
                 </label>
-                <h4>{span}</h4>
+                {gID &&
+                    <>
+                        <label htmlFor='governmentID'>Please attach a copy of a government-issued ID for yourself (required)
+                        </label>
+                        <button onClick={toggleModal}>Upload ID</button>
+                    </>
+                }
+                {/* {modal && (
+                    <div className="modal">
+                        <div onClick={toggleModal} className="overlay"></div>
+                        <div className="modal-content">
+                            <h2>Hello Modal</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+                                perferendis suscipit officia recusandae, eveniet quaerat assumenda
+                                id fugit, dignissimos maxime non natus placeat illo iusto!
+                                Sapiente dolorum id maiores dolores? Illum pariatur possimus
+                                quaerat ipsum quos molestiae rem aspernatur dicta tenetur. Sunt
+                                placeat tempora vitae enim incidunt porro fuga ea.
+                            </p>
+                            <button className="close-modal" onClick={toggleModal}>
+                                CLOSE
+                            </button>
+                        </div>
+                    </div>
+                )} */}
+                {modal &&
+                    <>
+                        <h6>
+                            Please upload a scanned photocopy or photograph of one piece of current government issued identification (ID). This can include any of the following Federal, Provincial or Territorial government issued ID:
+                        </h6>
+                        <li>Driver's License (or Operator’s License, in some provinces)</li>
+                        <li>Passport</li>
+                        <li>Certificate of Indian Status</li>
+                        <li>Secure Certificate of Indian Status</li>
+                        <li>Land Claim Beneficiary Card (including NTI Enrolment Card)</li>
+                        <li>Social Insurance Card (Paper or Card)</li>
+                        <li>Birth Certificate</li>
+                        <li>Old Age Security (OAS) Identification Card</li>
+                        <li>Firearms Possession and Acquisition Licence (PAL)</li>
+                        <li>Official Military ID</li>
+                        <li>Nexus Card</li>
+                        <li>Bring Your ID (BYID) Card (age of majority card)</li>
+                        <li>Permanent Resident Card</li>
+                        <li>U.S. State ID</li>
+                        <li>Certificate of Canadian Citizenship</li>
+                        <li>Northwest Territories Employee ID Card</li>
+                        <li>Prison/Correctional ID</li>
+                        <hr></hr>
+                        <label htmlFor='upload'>Attach a file</label>
+                        <input
+                            type='file'
+                            onChange={saveFileSelected}
+                        />
+                        {/* <input type="button" value="upload" onClick={importFile} /> */}
+                    </>
+                }
+
                 <button>Submit</button>
             </form>
             {/* <button className='link-btn' onClick={() => onFormSwitch('register')}>Don't have an account? Register</button> */}
