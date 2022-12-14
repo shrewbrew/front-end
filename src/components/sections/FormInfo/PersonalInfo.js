@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import './style.css';
 
@@ -36,6 +37,7 @@ function PersonalInfo() {
     const [gID, setGID] = useState(false);
 
     const [modal, setModal] = useState(false);
+    const history = useHistory()
 
 
 
@@ -157,6 +159,7 @@ function PersonalInfo() {
         //         //handle error
         //         console.log(response);
         //     });
+        history.push('/claim/payment')
     };
 
     // const importFile = async (e) => {
@@ -170,7 +173,7 @@ function PersonalInfo() {
     // };
     return (
         <div className='container border'>
-            <form className='personal-info-form' onSubmit={handleSubmit}>
+            <form id='form-part' className='personal-info-form' onSubmit={handleSubmit}>
                 <h6>
                     Please fill in all you can here, so we can process your claim. What
                     you write down should match what is on your government-issued ID. If a

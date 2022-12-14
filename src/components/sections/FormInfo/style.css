@@ -6,6 +6,7 @@
 
 input {
   padding: 5px;
+  text-align: left;
 }
 
 label {
@@ -17,9 +18,9 @@ table {
   border: none;
 }
 
-.radio-inline {
+/* .radio-inline {
   display: inline;
-}
+} */
 
 h6 {
   text-align: left;
@@ -28,6 +29,13 @@ li{
   text-align: left;
 }
 
+em{
+  text-align: left;
+}
+
+strong{
+  text-align: left;
+}
 /* body.active-modal {
   overflow-y: hidden;
 }

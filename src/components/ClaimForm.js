@@ -31,8 +31,8 @@ function ClaimForm({ className }) {
                     {pageDisplay()}
                 </div>
                 <div className='footer'></div>
-                <button disabled={page === 0} onClick={() => { setPage((currentPage) => currentPage - 1) }}>Prev</button>
-                <button disabled={page === formTitles.length - 1} onClick={() => { setPage((currentPage) => currentPage + 1) }}>Next</button>
+                {/* <button disabled={page === 0} onClick={() => { setPage((currentPage) => currentPage - 1) }} >Prev</button> */}
+                {/* <button disabled={page === formTitles.length - 1} onClick={() => { setPage((currentPage) => currentPage + 1) }} form='form-part' type="submit">Next</button> */}
             </div>
 
         </section>
