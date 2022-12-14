@@ -38,7 +38,6 @@ function PersonalInfo() {
     const [modal, setModal] = useState(false);
 
 
-    const [span, setSpan] = useState('Data submission ongoing....')
 
     const url = 'https://localhost:44378/api/ClaimManagement/SectionOne';
 
@@ -96,59 +95,79 @@ function PersonalInfo() {
     const isChecked = (value) => selectedGId === value
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         let formData = new FormData()
 
-        formData.append(firstName, fname)
-        formData.append(middleName, mname)
-        formData.append(lastName, lname)
-        formData.append(otherName, oname)
-        formData.append(dateOfBirth, dob)
-        formData.append(socialInsuranceNumber, sin)
-        formData.append(indianStatusCardNumber, iscn)
-        formData.append(bandRegistrationNumber, brn)
-        formData.append(bandNameMemberOf, bandName)
-        formData.append(provinceBandLocated, provinceName)
-        formData.append(streetNameAndNumber, streetName)
-        formData.append(UnitNumber, unitNumber)
-        formData.append(poBox, poBox)
-        formData.append(city, ctc)
-        formData.append(country, selectedCountry)
-        formData.append(province, province)
-        formData.append(postalCode, postal)
-        formData.append(telephoneNumber, telephone)
-        formData.append(mobileNumber, mobile)
-        formData.append(email, email)
-        formData.append(firstNationNameOfContactAddress, selectedFirstNation)
-        formData.append(nameOfNation, firstNationName)
-        formData.append(COname, cname)
-        formData.append(IsGovernmentIssuedID, selectedGId)
-        formData.append("file", fileSelected);
+        formData.append("firstName", fname)
+        formData.append("middleName", mname)
+        formData.append("lastName", lname)
+        formData.append("otherName", oname)
+        formData.append("dateOfBirth", dob)
+        formData.append("socialInsuranceNumber", sin)
+        formData.append("indianStatusCardNumber", iscn)
+        formData.append("bandRegistrationNumber", brn)
+        formData.append("bandNameMemberOf", bandName)
+        formData.append("provinceBandLocated", provinceName)
+        formData.append("streetNameAndNumber", streetName)
+        formData.append("UnitNumber", unitNumber)
+        formData.append("poBox", poBox)
+        formData.append("city", ctc)
+        formData.append("country", selectedCountry)
+        formData.append("province", province)
+        formData.append("postalCode", postal)
+        formData.append("telephoneNumber", telephone)
+        formData.append("mobileNumber", mobile)
+        formData.append("email", email)
+        formData.append("firstNationNameOfContactAddress", selectedFirstNation)
+        formData.append("nameOfNation", firstNationName)
+        formData.append("COname", cname)
+        formData.append("IsGovernmentIssuedID", selectedGId)
+        formData.append("GovernmentIDFile", fileSelected);
 
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' }
-        }
+        // const config = {
+        //     headers: { 'content-type': 'multipart/form-data' }
+        // }
 
 
-        axios.post(url, formData, config)
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-
-    const importFile = async (e) => {
-        const formData = new FormData();
-        formData.append("file", fileSelected);
+        // axios.post(url, formData, config)
+        //     .then(response => {
+        //         console.log(response);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
         try {
-            const res = await axios.post("https://localhost:44323/api/importfile", formData);
-        } catch (ex) {
-            console.log(ex);
+            const res = await axios.post(url, formData)
+            alert(res.data)
+        } catch (error) {
+            alert(error)
         }
+        // axios({
+        //     method: "post",
+        //     url: url,
+        //     data: formData,
+        //     headers: { "Content-Type": "multipart/form-data" },
+        // })
+        //     .then(function (response) {
+        //         //handle success
+        //         console.log(response);
+        //     })
+        //     .catch(function (response) {
+        //         //handle error
+        //         console.log(response);
+        //     });
     };
+
+    // const importFile = async (e) => {
+    //     const formData = new FormData();
+    //     formData.append("file", fileSelected);
+    //     try {
+    //         const res = await axios.post("https://localhost:44323/api/importfile", formData);
+    //     } catch (ex) {
+    //         console.log(ex);
+    //     }
+    // };
     return (
         <div className='container border'>
             <form className='personal-info-form' onSubmit={handleSubmit}>
