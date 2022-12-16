@@ -10,8 +10,12 @@ import LayoutDefault from './layouts/LayoutDefault';
 // Views 
 import Home from './views/Home';
 import Auth from './views/Auth';
-import DisplayForm from './views/DisplayForm';
 import PaymentInfo from './components/sections/FormInfo/PaymentInfo';
+import PersonalInfo from './components/sections/FormInfo/PersonalInfo';
+import ResidenceInfo from './components/sections/FormInfo/ResidenceInfo';
+import Authorization from './components/sections/FormInfo/Authorization';
+import SpecifiedInjuries from './components/sections/FormInfo/SpecifiedInjuries';
+import InjuryDetails from './components/sections/FormInfo/InjuryDetails';
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -41,8 +45,12 @@ const App = () => {
         <Switch>
           <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
           <AppRoute exact path="/login" component={Auth} layout={LayoutDefault} />
-          <AppRoute exact path="/claim" component={DisplayForm} layout={LayoutDefault} />
-          <AppRoute exact path="/claim/payment" component={PaymentInfo} layout={LayoutDefault} className="illustration-section-01" />
+          <AppRoute exact path="/claim/personalinfo" component={PersonalInfo} layout={LayoutDefault} />
+          <AppRoute exact path="/claim/paymentinfo" component={PaymentInfo} layout={LayoutDefault} />
+          <AppRoute exact path="/claim/residenceinfo" component={ResidenceInfo} layout={LayoutDefault} />
+          <AppRoute exact path="/claim/authorization" component={Authorization} layout={LayoutDefault} />
+          <AppRoute exact path="/claim/specinjury" component={SpecifiedInjuries} layout={LayoutDefault} />
+          <AppRoute exact path="/claim/specinjury-2" component={InjuryDetails} layout={LayoutDefault} />
         </Switch>
       )} />
   );

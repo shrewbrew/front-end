@@ -45,6 +45,7 @@ function PaymentInfo() {
 
   return (
     <section className={outerClasses}>
+      <h1>PART 1: PAYMENT OPTIONS</h1>
       <div className='container border'>
         <li>If you'd like a direct deposit, you must attach a void cheque or direct deposit form to this claim form, so we know where to send the money.</li>
 
@@ -102,7 +103,7 @@ function PaymentInfo() {
               <input id="files" type="file" onChange={saveFileSelected}></input>
             </>
           }
-          <button>Submit</button>
+          <button>Next and Save</button>
         </form>
 
       </div>

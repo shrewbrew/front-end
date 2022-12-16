@@ -2,13 +2,17 @@
   display: flex;
   flex-direction: column;
   width: auto;
+  margin-bottom: 10rem;
 }
 
 input {
   padding: 5px;
   text-align: left;
+  border: 1px solid black
 }
-
+a{
+  color: black;
+}
 label {
   font-size: large;
 }
@@ -26,6 +30,9 @@ h6 {
   text-align: left;
 }
 li{
+  text-align: left;
+}
+p{
   text-align: left;
 }
 

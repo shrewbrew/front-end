@@ -52,7 +52,7 @@ const Hero = ({
               <div className="reveal-from-bottom">
                 <ButtonGroup>
 
-                  <Link to="claim" className="button button-primary button-wide-mobile button-sm">Create Request</Link>
+                  <Link to="claim/personalinfo" className="button button-primary button-wide-mobile button-sm">Create Request</Link>
                   <Link to="claim" className="button button-primary button-wide-mobile button-sm">My Requests</Link>
                   <Link to="claim" className="button button-primary button-wide-mobile button-sm">Public Reading ROom</Link>
                 </ButtonGroup>
