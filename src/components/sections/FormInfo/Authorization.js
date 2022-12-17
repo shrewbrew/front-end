@@ -1,17 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios';
 import classNames from "classnames";
+import { useHistory } from 'react-router-dom'
+
 
 
 function Authorization() {
+    const url = 'https://localhost:44378/api/ClaimManagement/SectionThree'
+    const [fileSelected, setFileSelected] = useState();
+
+    const history = useHistory();
+
     const outerClasses = classNames(
         "section center-content",
         "illustration-section-01"
     );
+
+    const saveFileSelected = (e) => {
+        //in case you wan to print the file selected
+        //console.log(e.target.files[0]);
+        setFileSelected(e.target.files[0]);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let formData = new FormData()
+        formData.append("AuthorizationFile", fileSelected)
+        try {
+            const res = await axios.put(url, formData)
+            alert(res.data)
+        } catch (error) {
+            alert(error)
+        }
+        history.push('/claim/paymentinfo')
+    }
     return (
         <section className={outerClasses}>
             <div className='container border'>
                 <h1>PART 3: AUTHORIZATION</h1>
-                <form id='form-part' className='personal-info-form'>
+                <form id='form-part' className='personal-info-form' onSubmit={handleSubmit}>
                     <p>In this section, we <strong>make sure that you acknowledge and agree to the following key terms and conditions</strong> as part of submitting your claim:</p>
                     <ol type="1">
                         <li>The Administrator’s job is to process applications carefully, fairly, and efficiently, based on the instructions they are given and the information they are sent. They don’t represent Canada, the First Nations, or First Nations members. They are not lawyers, and they don’t offer legal advice</li>
@@ -45,8 +72,12 @@ function Authorization() {
                     </p>
                     <br></br>
                     <br></br>
-                    <button>Upload Completed Authorization</button>
-                   
+                    <span>Upload Completed Authorization</span>
+                    <input
+                        type='file'
+                        onChange={saveFileSelected}
+                    />
+                    <button>Next and Save</button>
                 </form>
 
             </div>
