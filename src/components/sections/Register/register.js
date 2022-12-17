@@ -22,12 +22,23 @@ const Register = ({ onFormSwitch, className }) => {
     const inputs = [
         {
             id: 1,
-            name: "username",
+            name: "firstname",
             type: "text",
-            placeholder: "Username",
+            placeholder: "Enter First Name",
             errorMessage:
-                "Username should be 3-16 characters and shouldn't include any special character!",
-            label: "Username",
+                "First name should be 3-16 characters and shouldn't include any special character!",
+            label: "First Name",
+            pattern: "^[A-Za-z0-9]{3,16}$",
+            required: true,
+        },
+        {
+            id: 2,
+            name: "lastname",
+            type: "text",
+            placeholder: "Enter Last Name",
+            errorMessage:
+                "Last name should be 3-16 characters and shouldn't include any special character!",
+            label: "Last Name",
             pattern: "^[A-Za-z0-9]{3,16}$",
             required: true,
         },
@@ -35,7 +46,7 @@ const Register = ({ onFormSwitch, className }) => {
             id: 2,
             name: "email",
             type: "email",
-            placeholder: "Email",
+            placeholder: "Enter your email",
             errorMessage: "It should be a valid email address!",
             label: "Email",
             required: true,
@@ -44,7 +55,7 @@ const Register = ({ onFormSwitch, className }) => {
             id: 4,
             name: "password",
             type: "password",
-            placeholder: "Password",
+            placeholder: "Enter Password",
             errorMessage:
                 "Password should be 8-20 characters and should include at least 1 letter, 1 number and 1 special character!",
             label: "Password",
