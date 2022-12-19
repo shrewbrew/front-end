@@ -54,6 +54,7 @@ const Header = ({
 
   const closeMenu = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('email')
     document.body.classList.remove('off-nav-is-active');
     nav.current && (nav.current.style.maxHeight = null);
     setIsactive(false);
@@ -122,9 +123,9 @@ const Header = ({
                     >
                       {localStorage.getItem('token') ?
                         <>
-                          {/* <li>
+                          <li>
                             <p>{localStorage.setItem('email')}</p>
-                          </li> */}
+                          </li>
                           <li>
                             <Link to="/" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}>Sign Out</Link>
                           </li>

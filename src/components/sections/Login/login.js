@@ -24,15 +24,12 @@ const Login = ({ onFormSwitch, className }) => {
             email: email,
             password: pass
         }
-        localStorage.setItem('token', 'qwert123')
-        // localStorage.setItem('email', 'email.toString()')
-        // axios.post(url, userData).then((result) => {
-        //     // alert(result.data)
-        //     localStorage.setItem('token', 'qwert123')
-        //     localStorage.setItem('email', email)
-        // }).catch((error) => {
-        //     alert(error)
-        // })
+        axios.post(url, userData).then((result) => {
+            localStorage.setItem('token', result.data[0].userId.toString())
+            localStorage.setItem('email', result.data[0].userEmail.toString())
+        }).catch((error) => {
+            alert(error)
+        })
         history.push('/')
 
     }

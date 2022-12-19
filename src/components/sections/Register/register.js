@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import FormInput from '../FormInput/FormInput';
 import classNames from "classnames";
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 
 import "./register.css"
@@ -18,6 +19,8 @@ const Register = ({ onFormSwitch, className }) => {
         "section center-content",
         className
     );
+
+    const history = useHistory()
     const url = 'https://localhost:44378/api/Account/Register'
     const inputs = [
         {
@@ -43,7 +46,7 @@ const Register = ({ onFormSwitch, className }) => {
             required: true,
         },
         {
-            id: 2,
+            id: 3,
             name: "email",
             type: "email",
             placeholder: "Enter your email",
@@ -79,10 +82,12 @@ const Register = ({ onFormSwitch, className }) => {
         // console.log(userData)
 
         axios.post(url, values).then((result) => {
-            alert(result.data);
+            localStorage.setItem('token', result.data[0].userId.toString())
+            localStorage.setItem('email', result.data[0].userEmail.toString())
         }).catch((error) => {
             alert(error)
         })
+        history.push('/')
     };
 
     const onChange = (e) => {
