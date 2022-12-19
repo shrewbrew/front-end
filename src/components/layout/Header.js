@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import Logo from './partials/Logo';
+import axios from 'axios';
 
 const propTypes = {
   navPosition: PropTypes.string,
@@ -31,6 +32,7 @@ const Header = ({
 }) => {
 
   const [isActive, setIsactive] = useState(false);
+  const url = "https://localhost:44378//api/Account/Logout"
 
   const nav = useRef(null);
   const hamburger = useRef(null);
@@ -63,7 +65,8 @@ const Header = ({
   const signOut = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('email')
-    
+    axios.post(url)
+
 
   }
 

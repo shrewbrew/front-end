@@ -1,33 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import './style.css';
+import axios from 'axios';
 
 function ResidenceInfo() {
+  const [tableData, setTableData] = useState({})
   const outerClasses = classNames(
     'section center-content',
     'illustration-section-01'
   );
+  useEffect(() => {
+    axios.get('https://localhost:44378/api/ClaimManagement/LookUpRecords')
+      .then(res => setTableData(res.data))
+  }, [])
 
-  const tableData = {
-    nations: [
-      {
-        id: 1,
-        name: 'Alexis Nakota Sioux Nation',
-        province: 'Alberta',
-        bNumber: 437,
-        startDate: 'Aug 21, 2007',
-        endDate: 'Mar 31, 2016',
-      },
-      {
-        id: 2,
-        name: 'Anishinabe Tallcree First Nation',
-        province: 'Alberta',
-        bNumber: 446,
-        startDate: '	Dec 10, 2003',
-        endDate: 'Feb 02, 2005',
-      },
-    ],
-  };
+  console.log(tableData)
+
+  // const tableData = {
+  //   nations: [
+  //     {
+  //       id: 1,
+  //       name: 'Alexis Nakota Sioux Nation',
+  //       province: 'Alberta',
+  //       bNumber: 437,
+  //       startDate: 'Aug 21, 2007',
+  //       endDate: 'Mar 31, 2016',
+  //     },
+  //     {
+  //       id: 2,
+  //       name: 'Anishinabe Tallcree First Nation',
+  //       province: 'Alberta',
+  //       bNumber: 446,
+  //       startDate: '	Dec 10, 2003',
+  //       endDate: 'Feb 02, 2005',
+  //     },
+  //   ],
+  // };
   console.log('=>', typeof parseInt(tableData.nations.id));
 
   // const [nationName, setNationName] = useState('');
@@ -170,7 +178,7 @@ function ResidenceInfo() {
               <table
                 aria-relevant='additions'
                 role='grid'
-                // class='table table-fluid table-hover'
+              // class='table table-fluid table-hover'
               >
                 <thead>
                   <tr>
@@ -207,8 +215,8 @@ function ResidenceInfo() {
                     </th>
                     <th
                       scope='col'
-                      // style='width:11.494252873563218%;'
-                      // class='sort-enabled'
+                    // style='width:11.494252873563218%;'
+                    // class='sort-enabled'
                     >
                       {/* <a
                     href='#'
@@ -222,8 +230,8 @@ function ResidenceInfo() {
                     </th>
                     <th
                       scope='col'
-                      // style='width:17.24137931034483%;'
-                      // class='sort-enabled'
+                    // style='width:17.24137931034483%;'
+                    // class='sort-enabled'
                     >
                       {/* <a
                     href='#'
@@ -237,8 +245,8 @@ function ResidenceInfo() {
                     </th>
                     <th
                       scope='col'
-                      // style='width:17.24137931034483%;'
-                      // class='sort-enabled'
+                    // style='width:17.24137931034483%;'
+                    // class='sort-enabled'
                     >
                       {/* <a
                     href='#'
