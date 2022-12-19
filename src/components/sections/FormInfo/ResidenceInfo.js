@@ -4,41 +4,25 @@ import './style.css';
 import axios from 'axios';
 
 function ResidenceInfo() {
-  const [tableData, setTableData] = useState({})
+  let [tableData, setTableData] = useState([])
   const outerClasses = classNames(
     'section center-content',
     'illustration-section-01'
   );
   useEffect(() => {
-    axios.get('https://localhost:44378/api/ClaimManagement/LookUpRecords')
-      .then(res => setTableData(res.data))
+    getData()
   }, [])
 
+  const getData = async () => {
+    await axios.get('https://localhost:44378/api/ClaimManagement/LookUpRecords')
+      .then((res) => {
+        setTableData([...res.data])
+      })
+
+  }
   console.log(tableData)
 
-  // const tableData = {
-  //   nations: [
-  //     {
-  //       id: 1,
-  //       name: 'Alexis Nakota Sioux Nation',
-  //       province: 'Alberta',
-  //       bNumber: 437,
-  //       startDate: 'Aug 21, 2007',
-  //       endDate: 'Mar 31, 2016',
-  //     },
-  //     {
-  //       id: 2,
-  //       name: 'Anishinabe Tallcree First Nation',
-  //       province: 'Alberta',
-  //       bNumber: 446,
-  //       startDate: '	Dec 10, 2003',
-  //       endDate: 'Feb 02, 2005',
-  //     },
-  //   ],
-  // };
-  console.log('=>', typeof parseInt(tableData.nations.id));
 
-  // const [nationName, setNationName] = useState('');
   const [table, setTable] = useState(true);
   const [nationName, setNationName] = useState('');
   const [sDate, setSDate] = useState('');
@@ -75,9 +59,10 @@ function ResidenceInfo() {
 
   };
   console.log('isChecked', isChecked);
+
   const inputFill = () => {
-    if (isChecked.length) {
-      let arr = tableData.nations.filter((el) => el.id == isChecked[0]);
+    if (isChecked.length === 1) {
+      let arr = tableData.filter((el) => el.reserveID == isChecked[0]);
       console.log(arr);
     }
 
@@ -87,6 +72,7 @@ function ResidenceInfo() {
     // setBand(arr[0].band);
     // setProv(arr[0].prov);
   };
+  inputFill()
 
   return (
     <section className={outerClasses}>
@@ -261,22 +247,22 @@ function ResidenceInfo() {
                   </tr>
                 </thead>
                 <tbody>
-                  {tableData.nations.map((rowdata, index) => (
+                  {tableData.map((rowdata, index) => (
                     <tr key={index}>
                       <td>
                         <input
                           type='checkbox'
-                          value={rowdata.id}
+                          value={rowdata.reserveID}
                           checked={rowdata.isChecked}
                           onChange={toggleCheckBox}
-                          onClick={inputFill}
+                        // onClick={inputFill}
                         />
                       </td>
                       <td>{rowdata.name}</td>
-                      <td>{rowdata.province}</td>
-                      <td>{rowdata.bNumber}</td>
-                      <td>{rowdata.startDate}</td>
-                      <td>{rowdata.endDate}</td>
+                      <td>{rowdata.proviences}</td>
+                      <td>{rowdata.firstNationBandNumber}</td>
+                      <td>{rowdata.startDateOfWaterAdvisory}</td>
+                      <td>{rowdata.endDateOfWaterAdvisory}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -137,7 +137,7 @@ function PersonalInfo() {
     //     });
     try {
       const res = await axios.post(url, formData);
-      alert(res.data);
+      localStorage.setItem('claimID', res.data.toString())
       
     } catch (error) {
       alert(error);

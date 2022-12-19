@@ -35,6 +35,7 @@ function PaymentInfo() {
     e.preventDefault();
     let formData = new FormData();
     formData.append('CheckorDepositFile', fileSelected);
+    formData.append('ClaimID', parseInt(localStorage.getItem('claimID')))
     try {
       const res = await axios.post(url, formData);
       alert(res.data);
