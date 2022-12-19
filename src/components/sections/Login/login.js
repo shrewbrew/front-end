@@ -17,19 +17,23 @@ const Login = ({ onFormSwitch, className }) => {
     const url = "https://localhost:44378/api/Account/Login"
     const history = useHistory()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         const userData = {
             email: email,
             password: pass
         }
-        axios.post(url, userData).then((result) => {
-            localStorage.setItem('token', result.data[0].userId.toString())
-            localStorage.setItem('email', result.data[0].userEmail.toString())
-        }).catch((error) => {
-            alert(error)
-        })
+
+        try {
+            const res = await axios.post(url, userData);
+            localStorage.setItem('token', res.data[0].userId.toString())
+            localStorage.setItem('email', res.data[0].userEmail.toString())
+
+        } catch (error) {
+            alert(error);
+        }
+
         history.push('/')
 
     }

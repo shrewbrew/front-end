@@ -53,11 +53,18 @@ const Header = ({
   }
 
   const closeMenu = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('email')
+
     document.body.classList.remove('off-nav-is-active');
     nav.current && (nav.current.style.maxHeight = null);
     setIsactive(false);
+    // localStorage.removeItem('token')
+    // localStorage.removeItem('email')
+  }
+  const signOut = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('email')
+    
+
   }
 
   const keyPress = (e) => {
@@ -124,14 +131,14 @@ const Header = ({
                       {localStorage.getItem('token') ?
                         <>
                           <li>
-                            <p>{localStorage.setItem('email')}</p>
+                            <p>{localStorage.getItem('email')}</p>
                           </li>
                           <li>
-                            <Link to="/" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}>Sign Out</Link>
+                            <Link to="/" className="button button-primary button-wide-mobile button-sm" onClick={signOut}>Sign Out</Link>
                           </li>
-                          </>
+                        </>
                         : <li>
-                          <Link to="login" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}>Login/Register</Link>
+                          <Link to="login" className="button button-primary button-wide-mobile button-sm" >Login/Register</Link>
                         </li>
                       }
 
