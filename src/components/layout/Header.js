@@ -44,7 +44,7 @@ const Header = ({
       document.removeEventListener('click', clickOutside);
       closeMenu();
     };
-  });  
+  });
 
   const openMenu = () => {
     document.body.classList.add('off-nav-is-active');
@@ -53,6 +53,7 @@ const Header = ({
   }
 
   const closeMenu = () => {
+    localStorage.removeItem('token')
     document.body.classList.remove('off-nav-is-active');
     nav.current && (nav.current.style.maxHeight = null);
     setIsactive(false);
@@ -66,7 +67,7 @@ const Header = ({
     if (!nav.current) return
     if (!isActive || nav.current.contains(e.target) || e.target === hamburger.current) return;
     closeMenu();
-  }  
+  }
 
   const classes = classNames(
     'site-header',
@@ -119,9 +120,20 @@ const Header = ({
                     <ul
                       className="list-reset header-nav-right"
                     >
-                      <li>
-                        <Link to="login" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}>Login/Register</Link>
-                      </li>
+                      {localStorage.getItem('token') ?
+                        <>
+                          {/* <li>
+                            <p>{localStorage.setItem('email')}</p>
+                          </li> */}
+                          <li>
+                            <Link to="/" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}>Sign Out</Link>
+                          </li>
+                          </>
+                        : <li>
+                          <Link to="login" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu}>Login/Register</Link>
+                        </li>
+                      }
+
                     </ul>}
                 </div>
               </nav>

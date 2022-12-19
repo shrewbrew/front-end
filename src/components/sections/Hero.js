@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames";
 import { SectionProps } from "../../utils/SectionProps";
 import { Link } from 'react-router-dom';
@@ -23,6 +23,8 @@ const Hero = ({
   invertColor,
   ...props
 }) => {
+
+  useEffect(() => { }, [])
 
   const outerClasses = classNames(
     "hero section center-content",
@@ -50,12 +52,24 @@ const Hero = ({
                 The deadline to submit is March 7, 2023.
               </p>
               <div className="reveal-from-bottom">
-                <ButtonGroup>
+                {localStorage.getItem('token') ?
 
-                  <Link to="claim/personalinfo" className="button button-primary button-wide-mobile button-sm">Create Request</Link>
-                  <Link to="claim" className="button button-primary button-wide-mobile button-sm">My Requests</Link>
-                  <Link to="claim" className="button button-primary button-wide-mobile button-sm">Public Reading ROom</Link>
-                </ButtonGroup>
+                  <>
+                    <ButtonGroup>
+
+                      <Link to="claim/personalinfo" className="button button-primary button-wide-mobile button-sm">Create Request</Link>
+                      <Link to="claim" className="button button-primary button-wide-mobile button-sm">My Requests</Link>
+                      <Link to="claim" className="button button-primary button-wide-mobile button-sm">Public Reading ROom</Link>
+                    </ButtonGroup></> :
+                  <>
+                    <ButtonGroup>
+
+                      <Link to="/login" className="button button-primary button-wide-mobile button-sm">Create Request</Link>
+                      <Link to="/login" className="button button-primary button-wide-mobile button-sm">My Requests</Link>
+                      <Link to="/login" className="button button-primary button-wide-mobile button-sm">Public Reading ROom</Link>
+                    </ButtonGroup></>
+                }
+
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import classNames from "classnames";
 import axios from 'axios';
 import "./login.css"
+import { useHistory } from 'react-router-dom';
 
 
 const Login = ({ onFormSwitch, className }) => {
@@ -14,6 +15,7 @@ const Login = ({ onFormSwitch, className }) => {
     );
 
     const url = "https://localhost:44378/api/Account/Login"
+    const history = useHistory()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -21,16 +23,17 @@ const Login = ({ onFormSwitch, className }) => {
         const userData = {
             email: email,
             password: pass
-            // Password: pass
         }
-        // console.log(userData)
-
-        axios.post(url, userData).then((result) => {
-            alert(result.data)
-        }).catch((error) => {
-            alert(error)
-        })
-
+        localStorage.setItem('token', 'qwert123')
+        // localStorage.setItem('email', 'email.toString()')
+        // axios.post(url, userData).then((result) => {
+        //     // alert(result.data)
+        //     localStorage.setItem('token', 'qwert123')
+        //     localStorage.setItem('email', email)
+        // }).catch((error) => {
+        //     alert(error)
+        // })
+        history.push('/')
 
     }
     return (
