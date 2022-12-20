@@ -1,11 +1,12 @@
 import React, { useContext, useState, createContext } from 'react';
 import classNames from 'classnames';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 function SpecifiedInjuries() {
   const [radio, setRadio] = useState('No');
 
-//   const radioState = useContext(RadioContext);
+  //   const radioState = useContext(RadioContext);
   const outerClasses = classNames(
     'section center-content',
     'illustration-section-01'
@@ -18,12 +19,22 @@ function SpecifiedInjuries() {
   };
 
   const history = useHistory();
+  const url = 'https://localhost:44378/api/ClaimManagement/SectionFourA'
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    const data = {
+      WillYouBeClaimingSpecifiedInjuries: radio,
+      ClaimID: parseInt(localStorage.getItem('claimID')),
+    }
 
-    history.push('/claim/specinjury-2');
+    try {
+      const res = await axios.put(url, data)
+      history.push('/claim/specinjury-2');
+    } catch (error) {
+      alert(error)
+    }
+
   };
 
   return (

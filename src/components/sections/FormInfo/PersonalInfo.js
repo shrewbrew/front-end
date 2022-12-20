@@ -79,7 +79,7 @@ function PersonalInfo() {
   };
 
   const saveFileSelected = (e) => {
-    
+
     setFileSelected(e.target.files[0]);
   };
 
@@ -117,16 +117,16 @@ function PersonalInfo() {
     formData.append('COname', cname);
     formData.append('IsGovernmentIssuedID', selectedGId);
     formData.append('GovernmentIDFile', fileSelected);
-
+    console.log(formData)
     try {
       const res = await axios.post(url, formData);
       localStorage.setItem('claimID', res.data.toString())
 
+      history.push('/claim/paymentinfo');
     } catch (error) {
       alert(error);
     }
 
-    history.push('/claim/paymentinfo');
   };
 
   return (

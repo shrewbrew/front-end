@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import './style.css';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 function ResidenceInfo() {
   let [tableData, setTableData] = useState([])
@@ -20,7 +21,7 @@ function ResidenceInfo() {
       })
 
   }
-  console.log(tableData)
+  // console.log(tableData)
 
 
   const [table, setTable] = useState(true);
@@ -35,10 +36,9 @@ function ResidenceInfo() {
   const [eYear, setEYear] = useState('');
 
   const [isChecked, setIsChecked] = useState([]);
+  const history = useHistory()
 
-  // const toggleTable = () => {
-  //     se
-  // }
+
 
   const handleChange = (e) => {
     const { checked } = e.target;
@@ -58,12 +58,12 @@ function ResidenceInfo() {
     }
 
   };
-  console.log('isChecked', isChecked);
+  // console.log('isChecked', isChecked);
 
   const inputFill = () => {
     if (isChecked.length === 1) {
       let arr = tableData.filter((el) => el.reserveID == isChecked[0]);
-      console.log(arr);
+      // console.log(arr);
     }
 
     // setNationName(arr[0].name);
@@ -72,28 +72,31 @@ function ResidenceInfo() {
     // setBand(arr[0].band);
     // setProv(arr[0].prov);
   };
-  inputFill()
+  // inputFill()
   const url = 'https://localhost:44378/api/ClaimManagement/SectionTwo'
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let formData = new FormData();
-    formData.append('ClaimID', parseInt(localStorage.getItem('claimID')))
-    formData.append('nameOfFirstNation ', nationName)
-    formData.append('startDateOfWaterAdvisory ', sDate)
-    formData.append('endDateOfWaterAdvisory ', eDate)
-    formData.append('firstNationBandNumber ', band)
-    formData.append('Proviences ', prov)
-    formData.append('impactedFirstNationFromMonth ', sMonth)
-    formData.append('impactedFirstNationToMonth ', eMonth)
-    formData.append('impactedFirstNationFromYear ', sYear)
-    formData.append('impactedFirstNationToYear ', eYear)
+    const data = {
+      nameOfFirstNation: nationName,
+      waterAdvisoryStartDate: sDate,
+      waterAdvisoryEndDate: eDate,
+      firstNationBandNumber: band,
+      provinceOrTerritory: prov,
+      fromMonth: sMonth,
+      toMonth: eMonth,
+      fromYear: sYear,
+      toYear: eYear
+    }
+
+
+    console.log(data)
     try {
-      const res = await axios.post(url, formData);
+      const res = await axios.post(url, data);
+      history.push('/claim/authorization')
     } catch (error) {
       alert(error);
     }
-    history.push('/claim/authorization')
 
   };
 

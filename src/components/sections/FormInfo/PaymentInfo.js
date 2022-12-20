@@ -29,7 +29,7 @@ function PaymentInfo() {
   const history = useHistory()
 
   const isChecked = (value) => option === value;
-  const url = '';
+  const url = 'https://localhost:44378/api/ClaimManagement/SectionOneB';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,12 +37,12 @@ function PaymentInfo() {
     formData.append('CheckorDepositFile', fileSelected);
     formData.append('ClaimID', parseInt(localStorage.getItem('claimID')))
     try {
-      const res = await axios.post(url, formData);
-      alert(res.data);
+      const res = await axios.put(url, formData);
+      // alert(res.data);
+      history.push('/claim/residenceinfo')
     } catch (error) {
       alert(error);
     }
-    history.push('/claim/residenceinfo')
 
   };
 

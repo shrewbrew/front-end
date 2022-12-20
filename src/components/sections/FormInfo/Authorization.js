@@ -30,11 +30,11 @@ function Authorization() {
 
         try {
             const res = await axios.put(url, formData)
-            alert(res.data)
+            // alert(res.data)
+            history.push('/claim/specinjury')
         } catch (error) {
             alert(error)
         }
-        history.push('/claim/paymentinfo')
     }
     return (
         <section className={outerClasses}>
