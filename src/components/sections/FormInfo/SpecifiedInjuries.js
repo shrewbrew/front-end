@@ -23,6 +23,7 @@ function SpecifiedInjuries() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    localStorage.setItem('injuryBtnValue', radio.toString());
     const data = {
       WillYouBeClaimingSpecifiedInjuries: radio,
       ClaimID: parseInt(localStorage.getItem('claimID')),

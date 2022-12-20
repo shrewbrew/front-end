@@ -50,8 +50,10 @@ function DigestiveHarm() {
   const history = useHistory();
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-    // let formData = new FormData();
+    e.preventDefault();
+    const data = {
+       
+    }
     // formData.append('daignosis', diagnosisInfo.diagnosis);
     // formData.append('pname', pname);
     // formData.append('levelOne', levelOne);
