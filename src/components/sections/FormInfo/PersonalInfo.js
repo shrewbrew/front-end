@@ -79,16 +79,10 @@ function PersonalInfo() {
   };
 
   const saveFileSelected = (e) => {
-    //in case you wan to print the file selected
-    //console.log(e.target.files[0]);
+    
     setFileSelected(e.target.files[0]);
   };
 
-  // if (modal) {
-  //     document.body.classList.add('active-modal')
-  // } else {
-  //     document.body.classList.remove('active-modal')
-  // }
 
   const isRadioSelected = (value) => selectedCountry === value;
   const isSelected = (value) => selectedFirstNation === value;
@@ -124,50 +118,17 @@ function PersonalInfo() {
     formData.append('IsGovernmentIssuedID', selectedGId);
     formData.append('GovernmentIDFile', fileSelected);
 
-    // const config = {
-    //     headers: { 'content-type': 'multipart/form-data' }
-    // }
-
-    // axios.post(url, formData, config)
-    //     .then(response => {
-    //         console.log(response);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     });
     try {
       const res = await axios.post(url, formData);
       localStorage.setItem('claimID', res.data.toString())
-      
+
     } catch (error) {
       alert(error);
     }
-    // axios({
-    //     method: "post",
-    //     url: url,
-    //     data: formData,
-    //     headers: { "Content-Type": "multipart/form-data" },
-    // })
-    //     .then(function (response) {
-    //         //handle success
-    //         console.log(response);
-    //     })
-    //     .catch(function (response) {
-    //         //handle error
-    //         console.log(response);
-    //     });
+
     history.push('/claim/paymentinfo');
   };
 
-  // const importFile = async (e) => {
-  //     const formData = new FormData();
-  //     formData.append("file", fileSelected);
-  //     try {
-  //         const res = await axios.post("https://localhost:44323/api/importfile", formData);
-  //     } catch (ex) {
-  //         console.log(ex);
-  //     }
-  // };
   return (
     <section className={outerClasses}>
       <div className='container border'>
@@ -567,7 +528,6 @@ function PersonalInfo() {
 
           <button>Next and Save</button>
         </form>
-        {/* <button className='link-btn' onClick={() => onFormSwitch('register')}>Don't have an account? Register</button> */}
       </div>
     </section>
   );

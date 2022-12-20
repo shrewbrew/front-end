@@ -73,12 +73,35 @@ function ResidenceInfo() {
     // setProv(arr[0].prov);
   };
   inputFill()
+  const url = 'https://localhost:44378/api/ClaimManagement/SectionTwo'
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append('ClaimID', parseInt(localStorage.getItem('claimID')))
+    formData.append('nameOfFirstNation ', nationName)
+    formData.append('startDateOfWaterAdvisory ', sDate)
+    formData.append('endDateOfWaterAdvisory ', eDate)
+    formData.append('firstNationBandNumber ', band)
+    formData.append('Proviences ', prov)
+    formData.append('impactedFirstNationFromMonth ', sMonth)
+    formData.append('impactedFirstNationToMonth ', eMonth)
+    formData.append('impactedFirstNationFromYear ', sYear)
+    formData.append('impactedFirstNationToYear ', eYear)
+    try {
+      const res = await axios.post(url, formData);
+    } catch (error) {
+      alert(error);
+    }
+    history.push('/claim/authorization')
+
+  };
 
   return (
     <section className={outerClasses}>
       <div className='container border'>
         <h1>PART 2: WHERE YOU LIVED</h1>
-        <form id='form-part' className='personal-info-form'>
+        <form id='form-part' className='personal-info-form' onSubmit={handleSubmit}>
           <p>
             In this section, you'll{' '}
             <strong>
