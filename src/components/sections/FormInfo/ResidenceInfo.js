@@ -60,19 +60,19 @@ function ResidenceInfo() {
   };
   // console.log('isChecked', isChecked);
 
-  const inputFill = () => {
+  const inputFill = (e) => {
+    e.preventDefault()
     if (isChecked.length === 1) {
       let arr = tableData.filter((el) => el.reserveID == isChecked[0]);
-      // console.log(arr);
+      let startDate = new Date(arr[0].startDateOfWaterAdvisory)
+      let endDate = new Date(arr[0].endDateOfWaterAdvisory)
+      setNationName(arr[0].name)
+      setSDate((startDate.getFullYear() + '-' + ((startDate.getMonth() > 8) ? (startDate.getMonth() + 1) : ('0' + (startDate.getMonth() + 1))) + '-' + ((startDate.getDate() > 9) ? startDate.getDate() : ('0' + startDate.getDate()))).toString())
+      setEDate((endDate.getFullYear() + '-' + ((endDate.getMonth() > 8) ? (endDate.getMonth() + 1) : ('0' + (endDate.getMonth() + 1))) + '-' + ((endDate.getDate() > 9) ? endDate.getDate() : ('0' + endDate.getDate()))).toString())
+      setBand(arr[0].firstNationBandNumber)
+      setProv(arr[0].proviences)
     }
-
-    // setNationName(arr[0].name);
-    // // setSDate(arr[0].sDate);
-    // // setEDate(arr[0].eDate);
-    // setBand(arr[0].band);
-    // setProv(arr[0].prov);
   };
-  // inputFill()
   const url = 'https://localhost:44378/api/ClaimManagement/SectionTwo'
 
   const handleSubmit = async (e) => {
@@ -294,6 +294,7 @@ function ResidenceInfo() {
                   ))}
                 </tbody>
               </table>
+              <button onClick={inputFill} style={{ width: "50%", marginLeft: "25%" }}>Select</button>
             </>
           )}
           <br></br>
