@@ -134,7 +134,7 @@ const Header = ({
                       {localStorage.getItem('token') ?
                         <>
                           <li>
-                            <p>{localStorage.getItem('email')}</p>
+                            <p style={{marginTop: "20px"}}>{localStorage.getItem('email')}</p>
                           </li>
                           <li>
                             <Link to="/" className="button button-primary button-wide-mobile button-sm" onClick={signOut}>Sign Out</Link>

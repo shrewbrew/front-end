@@ -29,12 +29,12 @@ const Login = ({ onFormSwitch, className }) => {
             const res = await axios.post(url, userData);
             localStorage.setItem('token', res.data[0].userId.toString())
             localStorage.setItem('email', res.data[0].userEmail.toString())
+            history.push('/')
 
         } catch (error) {
             alert(error);
         }
 
-        history.push('/')
 
     }
     return (

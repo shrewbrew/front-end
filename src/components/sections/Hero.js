@@ -46,7 +46,7 @@ const Hero = ({
               First Nations Drinking Water Class Action
             </h1>
             <div className="container-xs">
-              <p className="mt-16 mb-32 ">
+              <p className="mt-16 mb-32 " style={{textAlign: "center"}}>
                 The claims period is open. You can submit a Claim Form for
                 compensation under the First Nation Drinking Water Settlement.
                 The deadline to submit is March 7, 2023.

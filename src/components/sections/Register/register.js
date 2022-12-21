@@ -77,17 +77,19 @@ const Register = ({ onFormSwitch, className }) => {
         },
     ];
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
         // console.log(userData)
 
-        axios.post(url, values).then((result) => {
-            localStorage.setItem('token', result.data[0].userId.toString())
-            localStorage.setItem('email', result.data[0].userEmail.toString())
-        }).catch((error) => {
-            alert(error)
-        })
-        history.push('/')
+        try {
+            const res = await axios.post(url, values);
+            localStorage.setItem('token', res.data[0].userId.toString())
+            localStorage.setItem('email', res.data[0].userEmail.toString())
+            history.push('/')
+
+        } catch (error) {
+            alert(error);
+        }
     };
 
     const onChange = (e) => {

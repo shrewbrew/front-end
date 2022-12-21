@@ -45,7 +45,6 @@ function DigestiveHarm() {
     }
   };
 
-  console.log(diagnosisInfo.diagnosis.toString())
 
   const url = 'https://localhost:44378/api/ClaimManagement/SectionFourBDigestive';
 
@@ -64,14 +63,8 @@ function DigestiveHarm() {
 
     }
     console.log("form data", data)
-    // formData.append('daignosis', diagnosisInfo.diagnosis);
-    // formData.append('pname', pname);
-    // formData.append('levelOne', levelOne);
-    // formData.append('levelTwo', levelTwo);
-
     try {
       const res = await axios.put(url, data);
-      alert(res.data);
       history.push('/claim/specinjury-2')
     } catch (error) {
       alert(error);
@@ -145,7 +138,6 @@ function DigestiveHarm() {
             <b> Stomach ulcers </b>
           </label>
           <br></br>
-          {diagnosisInfo.diagnosis}
           <div
             style={{ 'border-top': '3px solid black', 'padding-top': '5px' }}
           >
