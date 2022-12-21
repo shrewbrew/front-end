@@ -5,7 +5,7 @@ import axios from 'axios';
 function DigestiveHarm() {
   const [pname, setPName] = useState();
   const [level, setLevel] = useState(
-    'Level 1: More than 1 month, but less than 1 year'
+    'Level 1'
   );
   const [levelOneInput, setLevelOneInput] = useState(true);
   const [levelTwoInput, setLevelTwoInput] = useState(false);
@@ -47,20 +47,23 @@ function DigestiveHarm() {
 
   console.log(diagnosisInfo.diagnosis.toString())
 
-  const url = 'https://localhost:44378/api/ClaimManagement/Section4B';
+  const url = 'https://localhost:44378/api/ClaimManagement/SectionFourBDigestive';
 
   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
-      ClaimID: parseInt(localStorage.getItem('claimID')),
-      Test: diagnosisInfo.diagnosis,
-      digestiveLevelOne : levelOne,
-      digestiveLevelTwo : levelTwo,
-      digestiveNameOfPractitioner : pname,
-       
+      claimID: parseInt(localStorage.getItem('claimID')),
+      ReceivedDigestive: diagnosisInfo.diagnosis,
+      digestiveLevelOne: (level === 'Level 1').toString(),
+      digestiveLevelTwo: (level === 'Level 2').toString(),
+      digestiveNameOfPractitioner: pname,
+      digestiveHarmHealthPractitionerType: levelOne
+
+
     }
+    console.log("form data", data)
     // formData.append('daignosis', diagnosisInfo.diagnosis);
     // formData.append('pname', pname);
     // formData.append('levelOne', levelOne);
@@ -69,11 +72,11 @@ function DigestiveHarm() {
     try {
       const res = await axios.put(url, data);
       alert(res.data);
+      history.push('/claim/specinjury-2')
     } catch (error) {
       alert(error);
     }
 
-    history.push('/claim/specinjury-2')
   };
   return (
     <section className='section center-content'>
@@ -164,9 +167,9 @@ function DigestiveHarm() {
             <input
               type='radio'
               name='harm'
-              value='Level 1: More than 1 month, but less than 1 year'
+              value='Level 1'
               checked={isSelected(
-                'Level 1: More than 1 month, but less than 1 year'
+                'Level 1'
               )}
               onChange={toggleChange}
             />
@@ -176,8 +179,8 @@ function DigestiveHarm() {
             <input
               type='radio'
               name='harm'
-              value='Level 2: 1 year or more'
-              checked={isSelected('Level 2: 1 year or more')}
+              value='Level 2'
+              checked={isSelected('Level 2')}
               onChange={toggleChange}
             />
             Level 2: 1 year or more

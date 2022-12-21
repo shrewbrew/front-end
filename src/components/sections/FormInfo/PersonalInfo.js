@@ -96,6 +96,7 @@ function PersonalInfo() {
     formData.append('middleName', mname);
     formData.append('lastName', lname);
     formData.append('otherName', oname);
+    formData.append('emailId', localStorage.getItem('email'))
     formData.append('dateOfBirth', dob);
     formData.append('socialInsuranceNumber', sin);
     formData.append('indianStatusCardNumber', iscn);
@@ -152,6 +153,7 @@ function PersonalInfo() {
             onChange={(e) => {
               setFname(e.target.value);
             }}
+            required
           />
           <label htmlFor='First'>Middle Name(s) (if applicable)</label>
           <input
@@ -172,6 +174,7 @@ function PersonalInfo() {
             onChange={(e) => {
               setLname(e.target.value);
             }}
+            required
           />
           <label htmlFor='First'>Other Name(s) know by (if applicable)</label>
           <input
@@ -192,6 +195,7 @@ function PersonalInfo() {
             onChange={(e) => {
               setDOB(e.target.value);
             }}
+            required
           />
           <h6>
             We understand that you might not have all this information, but
@@ -238,6 +242,7 @@ function PersonalInfo() {
             onChange={(e) => {
               setBandName(e.target.value);
             }}
+            required
           />
           <label htmlFor='provinceName'>
             Province Where Your Band is Located
@@ -250,6 +255,7 @@ function PersonalInfo() {
             onChange={(e) => {
               setProvinceName(e.target.value);
             }}
+            required
           />
           <h6>
             What we need here is your current mailing address or an address
@@ -267,6 +273,7 @@ function PersonalInfo() {
               id='street'
               onClick={toggleInput}
               checked={streetInput}
+              required
             />
             Street Name and Number
           </label>
@@ -279,6 +286,7 @@ function PersonalInfo() {
                 onChange={(e) => {
                   setStreetName(e.target.value);
                 }}
+                required
               />
               <label htmlFor='unitNumber'>Unit Number(if applicable)</label>
               <input
@@ -304,6 +312,7 @@ function PersonalInfo() {
               onChange={(e) => {
                 setPOBox(e.target.value);
               }}
+              required
             />
           )}
 
@@ -316,6 +325,7 @@ function PersonalInfo() {
             onChange={(e) => {
               setCTC(e.target.value);
             }}
+            required
           />
           <label htmlFor='country'>
             <input
@@ -356,6 +366,7 @@ function PersonalInfo() {
             onChange={(e) => {
               setProvince(e.target.value);
             }}
+            required
           />
           <label htmlFor='postal'>Postal Code</label>
           <input
@@ -366,6 +377,7 @@ function PersonalInfo() {
             onChange={(e) => {
               setPostal(e.target.value);
             }}
+            required
           />
           <label htmlFor='telephone'>Home Telephone Number:</label>
           <input
@@ -376,6 +388,7 @@ function PersonalInfo() {
             onChange={(e) => {
               setTelephone(e.target.value);
             }}
+            required
           />
           <label htmlFor='mobile'>
             Mobile Telephone Number(if applicable):
@@ -401,6 +414,7 @@ function PersonalInfo() {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
+            required
           />
           <h6>
             If this address is in a First Nation, please indicate the name of
@@ -441,6 +455,7 @@ function PersonalInfo() {
                 onChange={(e) => {
                   setFirstNationName(e.target.value);
                 }}
+                required
               />
             </>
           )}
@@ -521,7 +536,7 @@ function PersonalInfo() {
               <li>Prison/Correctional ID</li>
               <hr></hr>
               <label htmlFor='upload'>Attach a file</label>
-              <input type='file' onChange={saveFileSelected} />
+              <input type='file' onChange={saveFileSelected} required/>
               {/* <input type="button" value="upload" onClick={importFile} /> */}
             </>
           )}

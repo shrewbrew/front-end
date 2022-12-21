@@ -22,7 +22,7 @@ function InjuryDetails() {
   };
 
   const handleSubmit = (e) => {
-    if (injuryFormBtn)
+    if (!injuryFormBtn)
       history.push('/claim/Sworn-declaration')
   }
 

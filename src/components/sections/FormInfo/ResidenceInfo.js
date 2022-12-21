@@ -78,6 +78,7 @@ function ResidenceInfo() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
+      claimID: parseInt(localStorage.getItem('claimID')),
       nameOfFirstNation: nationName,
       waterAdvisoryStartDate: sDate,
       waterAdvisoryEndDate: eDate,

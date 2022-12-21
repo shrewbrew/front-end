@@ -12,7 +12,7 @@ function SwornDeclaration() {
     'section center-content',
     'illustration-section-01'
   );
-  const url = '';
+  const url = 'https://localhost:44378/api/ClaimManagement/SectionFive';
 
   const saveFileSelected = (e) => {
     //in case you wan to print the file selected
@@ -23,14 +23,15 @@ function SwornDeclaration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
-    formData.append('AuthorizationFile', fileSelected);
+    formData.append('swornFile', fileSelected);
+    formData.append('claimID', localStorage.getItem('claimID'))
     try {
       const res = await axios.put(url, formData);
-      alert(res.data);
+      alert("Form submitted successfully");
     } catch (error) {
       alert(error);
     }
-    history.push('/claim/paymentinfo');
+    // history.push('/claim/paymentinfo');
   };
   return (
     <section className={outerClasses}>
