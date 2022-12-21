@@ -7,10 +7,10 @@ function InjuryDetails() {
     'section center-content',
     'illustration-section-01'
   );
-  const [injuryFormBtn, setInjuryFormBtn] = useState(false)
+  const [injuryFormBtn, setInjuryFormBtn] = useState(true)
   useEffect(() => {
     if(localStorage.getItem('injuryBtnValue')==='Yes'){
-      setInjuryFormBtn(true)
+      setInjuryFormBtn(false)
     }
   }, [])
 

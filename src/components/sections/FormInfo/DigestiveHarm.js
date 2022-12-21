@@ -45,13 +45,20 @@ function DigestiveHarm() {
     }
   };
 
-  const url = '';
+  console.log(diagnosisInfo.diagnosis.toString())
+
+  const url = 'https://localhost:44378/api/ClaimManagement/Section4B';
 
   const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
+      ClaimID: parseInt(localStorage.getItem('claimID')),
+      Test: diagnosisInfo.diagnosis,
+      digestiveLevelOne : levelOne,
+      digestiveLevelTwo : levelTwo,
+      digestiveNameOfPractitioner : pname,
        
     }
     // formData.append('daignosis', diagnosisInfo.diagnosis);
@@ -59,12 +66,12 @@ function DigestiveHarm() {
     // formData.append('levelOne', levelOne);
     // formData.append('levelTwo', levelTwo);
 
-    // try {
-    //   const res = await axios.post(url, formData);
-    //   alert(res.data);
-    // } catch (error) {
-    //   alert(error);
-    // }
+    try {
+      const res = await axios.put(url, data);
+      alert(res.data);
+    } catch (error) {
+      alert(error);
+    }
 
     history.push('/claim/specinjury-2')
   };
